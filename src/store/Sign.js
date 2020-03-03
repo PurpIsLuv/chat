@@ -1,3 +1,7 @@
+import axios from 'axios'
+import router from '../router'
+
+
 export default {
     state: {
         login: '',
@@ -6,19 +10,32 @@ export default {
         secondPassword: ''
     },
     actions: {
-        postRequestSignIn(ctx,{email,password}){
-            console.log("updateData"+ email + password)
-            ctx.commit("updateData",{email,password})
+        async postRequestSignIn(ctx,{email,password}){
+            const res = await axios.post(`http://localhost:8081/${email}/${password}`)
+            if (res.status==200){
+                ctx.commit("updateData",res.data)
+                router.push("/MainPage/" + res.data.login)
+            }else if (res.status==400){
+                alert('Неверный пароль')
+            }else if (res.status==404){
+                alert('Пользователь не найден')
+            }  
         },
-        postRequestSignUp(ctx,{login,email,password}){
-            console.log("updateData"+ login + email + password)
-            ctx.commit("updateData",{login,email,password})
+        async postRequestSignUp(ctx,{login,email,password}){
+            const res = await axios.post(`http://localhost:8081/SignUp/${login}/${email}/${password}`)
+            if(res.status ==201){
+                ctx.commit("updateData",res.data)
+                router.push("/MainPage/" + login)
+            }else if (res.status==203){
+                alert(res.data)
+            }
         },
     },
     mutations: {
-        updateData(state,{email,password}){
-            state.email = email
-            state.password = password
+        updateData(state,res){
+            state.login = res.login
+            state.password = ''
+            state.secondPassword = ''
         }
     },
     getters:{

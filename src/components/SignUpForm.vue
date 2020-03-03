@@ -7,8 +7,6 @@
             <input type="password" placeholder="repeat password" required v-model="getData.secondPassword">
             <button type="submit">send</button>
         </form>
-        <p>{{getData.password}}</p>
-        <p>{{getData.secondPassword}}</p>
     </div>
 </template>
 

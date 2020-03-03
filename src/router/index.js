@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import SignUp from '../views/SignUp.vue'
 import SignIn from '../views/SignIn.vue'
+import MainPage from '../views/MainPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -16,6 +18,11 @@ const routes = [
     path: '/SignUp',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/MainPage/:login',
+    name: 'MainPage',
+    component: MainPage
   },
 ]
 
