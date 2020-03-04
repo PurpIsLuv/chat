@@ -12,7 +12,7 @@
 import {mapGetters,mapActions} from 'vuex'
 export default {
     computed: {
-        ...mapGetters(['getData'])
+        ...mapGetters(['getData']),
     },
     methods:{
         ...mapActions(['postRequestSignIn']),

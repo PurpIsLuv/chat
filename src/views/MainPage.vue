@@ -2,14 +2,19 @@
     <div class="MainPage">
         mainpage
         {{getData}}
+        <ChatField/>
     </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import ChatField from '../components/ChatField'
 export default {
     computed:{
         ...mapGetters(['getData'])
+    },
+    components:{
+        ChatField
     },
 }
 </script>

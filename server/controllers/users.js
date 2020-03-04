@@ -2,6 +2,7 @@ const {users} = require('../models')
 const bcrypt = require('bcryptjs')
 
 function createUser(req,res){
+    console.log('Check:::::CreateUSER')
     users.findOne({
         where:{
             email: req.params.email
@@ -27,6 +28,7 @@ function createUser(req,res){
     })
 }
 function findUser(req,res){
+    console.log('Check:::::findUser')
     users.findOne({
         where: {
             email: req.params.email
@@ -39,10 +41,10 @@ function findUser(req,res){
                     login: user.login,
                 })
             }else{
-                res.status(400).send('Пароль гавно')
+                res.status(202).send('Неверный пароль')
             }
         }else{
-            res.status(404).send('Пользователь не найден')
+            res.status(204).send('Пользователь не найден')
         }
     })
 }
