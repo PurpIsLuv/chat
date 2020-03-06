@@ -2,54 +2,36 @@
     <div class="ChatField">
 
         ChatField
-        
+        {{getData}}
+        <input type="text" v-model="getData.message">
+        <button type="submit" @click.prevent="sendMessage(getData.message)">Отправить</button>
+
+        <div class="messages" v-for="(data,index) in getDataMessage" :key="index">
+            <p>{{data.message}}</p>
+        </div>
+
     </div>
 </template>
 
 <script>
-/*import io from 'socket.io-client'
+import {mapActions,mapGetters,mapMutations} from 'vuex'
+
 export default {
-    data(){
-        return{
-            message: '',
-            socket: io('localhost:8081'),
-            messages: [],
-        }
-    },
     computed: {
-        
+        ...mapGetters(['getData','getDataMessage']),
     },
     methods:{
-        sendMessage(message){
-            this.socket.emit('SEND_MESSAGE',{
-                user: this.user,
-                message: message
+        ...mapActions(['sendMessageInServer','listenServerData']),
+        sendMessage(message){            
+            this.sendMessageInServer({
+                message, 
+                login: this.getData.login
             })
-            message = ''
+            this.getData.message = ''
         }
     },
-    mounted(){
-        this.socket.on('MESSAGE',data=>{
-            this.messages = [...this.messages,data]
-        })
+    created(){
+        this.listenServerData()
     }
 }
-
-
-
-
-<div class="messages" v-for="(msg,index) in messages" :key="index">
-            <p><span>{{msg.user}}:{{msg.message}}</span></p>
-        </div>
-
-        <input type="text" v-model="message">
-        <button type="submit" @click.prevent="sendMessage(message)">Отправить</button>
-
-
-
-
-
-
-
-*/
 </script>

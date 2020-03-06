@@ -20,7 +20,7 @@ app.post('/:email/:password',controllers.findUser)
 const server = app.listen(config.port,()=>{
     console.log('Server listen in ' + config.port)
 })
-/*
+
 
 const io = require('socket.io')(server)
 
@@ -32,4 +32,3 @@ io.on('connection', function(socket){
     })
 });
 
-*/

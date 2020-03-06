@@ -2,7 +2,6 @@ const {users} = require('../models')
 const bcrypt = require('bcryptjs')
 
 function createUser(req,res){
-    console.log('Check:::::CreateUSER')
     users.findOne({
         where:{
             email: req.params.email
@@ -28,7 +27,6 @@ function createUser(req,res){
     })
 }
 function findUser(req,res){
-    console.log('Check:::::findUser')
     users.findOne({
         where: {
             email: req.params.email

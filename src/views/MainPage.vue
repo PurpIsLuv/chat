@@ -1,7 +1,6 @@
 <template>
     <div class="MainPage">
         mainpage
-        {{getData}}
         <ChatField/>
     </div>
 </template>

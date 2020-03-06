@@ -1,27 +1,38 @@
-//import io from 'socket.io-client'
-/*
+import io from 'socket.io-client'
+
 export default {
     state:{
         socket: io('localhost:8081'),
-        message: ''
+        message: '',
+        data: []
     },
     actions:{
-        sendMessageInServer(ctx,message){
-            
-            state.socket.emit('SEND_MESSAGE',{
-                user: this.user,
-                message: message
-            })
-            
-           console.log(message)
+        sendMessageInServer(ctx,data){
+           ctx.commit("updateServerData",data)
+        },
+        listenServerData(ctx){
+            ctx.commit("updateClientData")
         }
     },
     mutations:{
-        
-    },
-    getters:{
-        getMessage(state){
-            return state
+        updateServerData(state,data){
+            state.socket.emit('SEND_MESSAGE',{
+                user: data.login,
+                message: data.message
+            })     
+        }, 
+        updateClientData(state){
+            state.socket.on('MESSAGE',data=>{
+                state.data.push({
+                    message: data.message,
+                    user: data.user
+                })     
+            })
         }
     },
-}*/
+    getters:{
+        getDataMessage(state){
+            return state.data
+        }
+    },
+}

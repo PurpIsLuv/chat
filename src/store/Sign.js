@@ -11,7 +11,7 @@ export default {
     },
     actions: {
         async postRequestSignIn(ctx,{email,password}){           
-            const res = await axios.post(`http://localhost:8081/${email}/${password}`)
+            const res = await axios.post(`http://192.168.1.6:8081/${email}/${password}`)
             if (res.status==200){
                 ctx.commit("updateData",res.data)
                 router.push("/MainPage/" + res.data.login)
@@ -22,7 +22,7 @@ export default {
             }  
         },
         async postRequestSignUp(ctx,{login,email,password}){
-            const res = await axios.post(`http://localhost:8081/SignUp/${login}/${email}/${password}`)
+            const res = await axios.post(`http://192.168.1.6:8081/SignUp/${login}/${email}/${password}`)
             if(res.status == 201){
                 ctx.commit("updateData",res.data)
                 router.push("/MainPage/" + login)
