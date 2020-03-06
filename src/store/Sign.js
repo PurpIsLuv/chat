@@ -36,6 +36,7 @@ export default {
             state.login = res.login
             state.password = ''
             state.secondPassword = ''
+            localStorage.login = state.login
         }
     },
     getters:{

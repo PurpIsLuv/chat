@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 
 export default {
     state:{
-        socket: io('localhost:8081'),
+        socket: io('192.168.1.6:8081'),
         message: '',
         data: []
     },
