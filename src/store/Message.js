@@ -2,9 +2,10 @@ import io from 'socket.io-client'
 
 export default {
     state:{
-        socket: io('192.168.1.6:8081'),
         message: '',
-        data: []
+        data: [],
+        socket: io('192.168.1.6:8081'),
+        whoseLetter: '',
     },
     actions:{
         sendMessageInServer(ctx,data){
@@ -12,7 +13,7 @@ export default {
         },
         listenServerData(ctx){
             ctx.commit("updateClientData")
-        }
+        },
     },
     mutations:{
         updateServerData(state,data){
@@ -23,12 +24,18 @@ export default {
         }, 
         updateClientData(state){
             state.socket.on('MESSAGE',data=>{
+                if (data.user == localStorage.login){
+                    state.whoseLetter = true
+                }else{
+                    state.whoseLetter = false
+                }
                 state.data.push({
                     message: data.message,
-                    user: data.user
-                })     
+                    user: data.user,
+                    whoseLetter: state.whoseLetter
+                }) 
             })
-        }
+        },
     },
     getters:{
         getDataMessage(state){
