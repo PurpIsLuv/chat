@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 
-const config = require('./config/config')
+const config = require('./config/devconf')
 const controllers = require('./controllers/users')
 
 const app = express()
